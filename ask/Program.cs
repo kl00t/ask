@@ -27,7 +27,7 @@ if (args.Length > 0)
 
         Console.ForegroundColor = ConsoleColor.Green;
 
-        Console.WriteLine($"My guess is: {guess}");
+        Console.WriteLine(guess);
 
         Console.ResetColor();
     }
