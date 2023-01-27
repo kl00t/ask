@@ -23,13 +23,7 @@ if (args.Length > 0)
     {
         var dynamicData = JsonConvert.DeserializeObject<dynamic>(responseString);
 
-        string guess = GuessCommand(dynamicData!.choices[0].text);
-
-        Console.ForegroundColor = ConsoleColor.Green;
-
-        Console.WriteLine(guess);
-
-        Console.ResetColor();
+        GuessCommand(dynamicData!.choices[0].text);
     }
     catch (Exception ex)
     {
@@ -41,21 +35,17 @@ else
     Console.WriteLine("You need to provide some input.");
 }
 
-static string GuessCommand(string raw)
+static void GuessCommand(string raw)
 {
-    Console.WriteLine("GPT-3 API returned text:");
-
-    Console.ForegroundColor = ConsoleColor.Yellow;
-
-    Console.WriteLine(raw);
-
     var lastIndex = raw.LastIndexOf('\n');
 
     string guess = raw.Substring(lastIndex + 1);
 
+    Console.ForegroundColor = ConsoleColor.Green;
+
+    Console.WriteLine(guess);
+
     Console.ResetColor();
 
     ClipboardService.SetText(guess);
-
-    return guess;
 }
